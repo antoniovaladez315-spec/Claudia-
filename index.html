@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tengo algo que decirte 👀</title>
+<style>
+body {
+  background: #171326;
+  color: white;
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+main { padding: 30px; max-width: 400px; }
+h1 { font-size: 30px; line-height: 1.4; }
+p { color: #d4c9e9; line-height: 1.6; }
+button {
+  background: #b89aff;
+  color: #171326;
+  border: 0;
+  border-radius: 30px;
+  padding: 16px 30px;
+  font-size: 17px;
+  font-weight: bold;
+  margin-top: 20px;
+  cursor: pointer;
+}
+#mensaje { animation: aparecer .6s ease; }
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+<main>
+  <div id="mensaje">
+    <h1 id="titulo">Oye, tú... 👀</h1>
+    <p id="texto">Sí, tú. Tengo algo que decirte.</p>
+  </div>
+  <button id="boton" onclick="siguiente()">
+    ¿Qué pasó?
+  </button>
+</main>
+<script>
+const pasos = [
+  ["Oye, tú... 👀",
+   "Sí, tú. Tengo algo que decirte.",
+   "¿Qué pasó?"],
+  ["Primero que nada...",
+   "Promete que no te vas a reír 😂",
+   "Lo prometo"],
+  ["Bueno, resulta que...",
+   "Hay algo que llevo tiempo queriendo decirte.",
+   "Ya dimeee"],
+  ["Aquí viene lo importante ❤️",
+   "ESCRIBE AQUÍ TU MENSAJE ESPECIAL.",
+   "¿Y eso es todo?"],
+  ["Una última cosa ✨",
+   "ESCRIBE AQUÍ TU MENSAJE FINAL.",
+   "Volver a empezar"]
+];
+let paso = 0;
+function siguiente() {
+  paso = (paso + 1) % pasos.length;
+  const m = document.getElementById("mensaje");
+  m.style.animation = "none";
+  void m.offsetWidth;
+  m.style.animation = "aparecer .6s ease";
+  document.getElementById("titulo").textContent = pasos[paso][0];
+  document.getElementById("texto").textContent = pasos[paso][1];
+  document.getElementById("boton").textContent = pasos[paso][2];
+}
+</script>
+</body>
+</html>
