@@ -3,80 +3,161 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tengo algo que decirte 👀</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Claudia ❤️</title>
+
 <style>
+* {
+  box-sizing: border-box;
+}
+
 body {
-  background: #171326;
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #171326, #342044);
   color: white;
   font-family: Arial, sans-serif;
-  min-height: 100vh;
-  margin: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
 }
-main { padding: 30px; max-width: 400px; }
-h1 { font-size: 30px; line-height: 1.4; }
-p { color: #d4c9e9; line-height: 1.6; }
+
+.contenedor {
+  width: 90%;
+  max-width: 420px;
+  padding: 30px 20px;
+}
+
+h1 {
+  font-size: 29px;
+  line-height: 1.4;
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.7;
+  color: #e2d6ee;
+}
+
 button {
-  background: #b89aff;
-  color: #171326;
-  border: 0;
+  background: #c7a4ff;
+  color: #20132e;
+  border: none;
+  padding: 15px 28px;
   border-radius: 30px;
-  padding: 16px 30px;
   font-size: 17px;
   font-weight: bold;
-  margin-top: 20px;
   cursor: pointer;
+  margin-top: 25px;
 }
-#mensaje { animation: aparecer .6s ease; }
+
+button:active {
+  transform: scale(0.95);
+}
+
+.animacion {
+  animation: aparecer 0.6s ease;
+}
+
 @keyframes aparecer {
-  from { opacity: 0; transform: translateY(15px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.corazon {
+  font-size: 45px;
+  margin-bottom: 20px;
 }
 </style>
 </head>
+
 <body>
-<main>
-  <div id="mensaje">
-    <h1 id="titulo">Oye, tú... 👀</h1>
-    <p id="texto">Sí, tú. Tengo algo que decirte.</p>
+
+<div class="contenedor">
+  <div id="contenido" class="animacion">
+    <div class="corazon">💌</div>
+    <h1 id="titulo">Oye, Claudia... 👀</h1>
+    <p id="texto">
+      Tengo algo que decirte, pero necesito
+      que presiones ese botón.
+    </p>
   </div>
+
   <button id="boton" onclick="siguiente()">
-    ¿Qué pasó?
+    ¿Qué pasó? 👀
   </button>
-</main>
+</div>
+
 <script>
-const pasos = [
-  ["Oye, tú... 👀",
-   "Sí, tú. Tengo algo que decirte.",
-   "¿Qué pasó?"],
-  ["Primero que nada...",
-   "Promete que no te vas a reír 😂",
-   "Lo prometo"],
-  ["Bueno, resulta que...",
-   "Hay algo que llevo tiempo queriendo decirte.",
-   "Ya dimeee"],
-  ["Aquí viene lo importante ❤️",
-   "ESCRIBE AQUÍ TU MENSAJE ESPECIAL.",
-   "¿Y eso es todo?"],
-  ["Una última cosa ✨",
-   "ESCRIBE AQUÍ TU MENSAJE FINAL.",
-   "Volver a empezar"]
+const mensajes = [
+  {
+    titulo: "Oye, Claudia... 👀",
+    texto: "Tengo algo que decirte, pero necesito que presiones ese botón.",
+    boton: "¿Qué pasó? 👀",
+    emoji: "💌"
+  },
+  {
+    titulo: "Primero que nada...",
+    texto: "Prométeme que no te vas a reír de lo que voy a decirte 😂",
+    boton: "Lo prometo 🤞",
+    emoji: "🤨"
+  },
+  {
+    titulo: "Bueno...",
+    texto: "La verdad es que no sabía cómo decirte esto, así que hice una página web. Sí, así de dramático soy JAJAJA.",
+    boton: "Ya dimeee 🙄",
+    emoji: "😂"
+  },
+  {
+    titulo: "Ahora sí ❤️",
+    texto: "Quería decirte que eres una persona muy especial para mí y que me encanta poder compartir momentos contigo.",
+    boton: "Continúa... 🥹",
+    emoji: "❤️"
+  },
+  {
+    titulo: "Y una última cosa...",
+    texto: "No olvides lo mucho que vales y lo bonita que es tu forma de ser. Espero haberte sacado una sonrisa.",
+    boton: "¿Otra vez? 💕",
+    emoji: "✨"
+  }
 ];
-let paso = 0;
+
+let indice = 0;
+
 function siguiente() {
-  paso = (paso + 1) % pasos.length;
-  const m = document.getElementById("mensaje");
-  m.style.animation = "none";
-  void m.offsetWidth;
-  m.style.animation = "aparecer .6s ease";
-  document.getElementById("titulo").textContent = pasos[paso][0];
-  document.getElementById("texto").textContent = pasos[paso][1];
-  document.getElementById("boton").textContent = pasos[paso][2];
+  indice++;
+
+  if (indice >= mensajes.length) {
+    indice = 0;
+  }
+
+  const mensaje = mensajes[indice];
+  const contenido = document.getElementById("contenido");
+
+  contenido.classList.remove("animacion");
+  void contenido.offsetWidth;
+  contenido.classList.add("animacion");
+
+  document.getElementById("titulo").textContent =
+    mensaje.titulo;
+
+  document.getElementById("texto").textContent =
+    mensaje.texto;
+
+  document.getElementById("boton").textContent =
+    mensaje.boton;
+
+  document.querySelector(".corazon").textContent =
+    mensaje.emoji;
 }
 </script>
+
 </body>
 </html>
